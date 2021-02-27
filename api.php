@@ -8178,7 +8178,9 @@ namespace Tqdev\PhpCrudApi\Middleware {
             $condition = new NoCondition();
             $table = $this->reflection->getTable($tableName);
             foreach ($pairs as $k => $v) {
-                $condition = $condition->_and(new ColumnCondition($table->getColumn($k), 'eq', $v));
+                if($v !== null){
+                    $condition = $condition->_and(new ColumnCondition($table->getColumn($k), 'eq', $v));
+                }
             }
             return $condition;
         }
